@@ -15,15 +15,15 @@ on my behalf, without me being at the keyboard.
 
 ## Status
 
-Task 1 (collection) is working and verified against the live API. Task 2 and the
-scheduled workflow are next.
+Task 1 (collection) is working and verified against the live API. Task 2 is written
+but has not been run yet - no replies have been posted. The scheduled workflow is next.
 
 - [x] Repo initialized, `.gitignore` in place
 - [x] Assignment and rubric documented under `docs/`
 - [x] GitHub repository secrets and variables configured
 - [x] `requirements.txt`
 - [x] Task 1 - collection
-- [ ] Task 2 - check-in replies
+- [~] Task 2 - check-in replies (written, not yet run)
 - [ ] GitHub Actions workflow
 
 See [docs/RUBRIC.md](docs/RUBRIC.md) for the full checklist.
@@ -149,6 +149,7 @@ before anything is created. This table is updated as the project goes.
 | 2026-09-15 | Claude Code (Opus 5) | Folded the separate setup doc into the README as a setup section. |
 | 2026-09-15 | Claude Code (Opus 5) | Probed the live API to confirm pagination, body truncation, and the attachment object shape before any code was written. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrote Task 1: the `PracticeHubClient` paging methods, the `Collector` class, and `requirements.txt`. |
+| 2026-09-15 | Claude Code (Opus 5) | Wrote Task 2: the `Replier` class, the keyword match, the duplicate-reply guard, and the 423 handling. |
 
 ### What I wrote myself
 
