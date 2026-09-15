@@ -155,6 +155,7 @@ before anything is created. This table is updated as the project goes.
 | 2026-09-15 | Claude Code (Opus 5) | Wrote Task 1: the `PracticeHubClient` paging methods, the `Collector` class, and `requirements.txt`. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrote Task 2: the `Replier` class, the keyword match, the duplicate-reply guard, and the 423 handling. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrote `.github/workflows/checkin.yml`, and checked the cron times against the Central time zone. |
+| 2026-09-15 | Claude Code (Opus 5) | Wrapped the two tasks in separate try/except blocks so a failed collection cannot stop the check-in replies. |
 
 ### What I wrote myself
 

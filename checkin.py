@@ -196,15 +196,40 @@ def main():
         raise SystemExit("PRACTICE_API_TOKEN is not set. Add it to .env locally, "
                          "or as a repository secret on GitHub.")
 
+    # If this fails the token itself is bad, so neither task could work anyway.
     client = PracticeHubClient()
     me = client.me()
     print(f"Running as {me['name']} (id {me['id']}) against {API_URL}\n")
 
-    print(f"Task 1 - collecting posts by user {INSTRUCTOR_ID}")
-    posts = Collector(client, INSTRUCTOR_ID).collect()
+    failures = 0
+    posts = []
 
-    print(f"\nTask 2 - replying to check-ins")
-    Replier(client, me["id"]).reply(posts)
+    # The two tasks are wrapped separately so that one failing does not stop the
+    # other. Task 2 is the one that matters most here: a check-in window that
+    # closes unanswered cannot be recovered, while a collection that fails is
+    # simply redone on the next scheduled run.
+    print(f"Task 1 - collecting posts by user {INSTRUCTOR_ID}")
+    try:
+        posts = Collector(client, INSTRUCTOR_ID).collect()
+    except SystemExit as err:
+        print(f"Task 1 failed: {err}")
+        failures += 1
+
+    print("\nTask 2 - replying to check-ins")
+    try:
+        # Task 1 normally hands over the posts it collected. If it fell over
+        # before returning them, Task 2 fetches the list it needs for itself.
+        if not posts:
+            posts = client.allPosts(INSTRUCTOR_ID)
+        Replier(client, me["id"]).reply(posts)
+    except SystemExit as err:
+        print(f"Task 2 failed: {err}")
+        failures += 1
+
+    # A non-zero exit turns the Actions run red, so a failure is visible in the
+    # Actions tab instead of passing quietly.
+    if failures:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
