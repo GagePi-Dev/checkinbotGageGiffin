@@ -1,6 +1,6 @@
 # INF 601 - Scheduled Check-In Bot
 
-Gage Giffin · Assigned Week 4, due end of Week 6
+Gage Giffin · Assigned Week 4 · due Sunday 27 September 2026, 11:59 PM Central
 
 A Python bot that GitHub Actions runs on a cron schedule. It talks to the FHSU Practice
 Hub REST API and does two things every run:
@@ -15,9 +15,12 @@ on my behalf, without me being at the keyboard.
 
 ## Status
 
-Task 1 (collection) is working and verified against the live API. Task 2 and the
-scheduled workflow are written but have not been run yet - no replies have been
-posted.
+Both tasks and the workflow are written. Collection has been run locally against the
+live API and verified. No check-in reply has been posted yet and the workflow has not
+run.
+
+`artifact/` is deliberately absent from the repo at the moment: it was cleared so that
+the first workflow run rebuilds it and commits it back on its own.
 
 - [x] Repo initialized, `.gitignore` in place
 - [x] Assignment and rubric documented under `docs/`
@@ -28,6 +31,44 @@ posted.
 - [~] GitHub Actions workflow (written, not yet run)
 
 See [docs/RUBRIC.md](docs/RUBRIC.md) for the full checklist.
+
+## Project structure
+
+```
+checkinbotGageGiffin/
+├── .github/
+│   └── workflows/
+│       └── checkin.yml     the cron schedule and the job that runs the bot
+├── artifact/               the graded output - created by the bot, not by hand
+│   ├── collected.json      every instructor post: title, full body, tags, timestamps
+│   └── files/              every attachment, saved as <attachment id>_<filename>
+├── docs/
+│   ├── ASSIGNMENT.md       the assignment instructions
+│   └── RUBRIC.md           the 100-point breakdown as a checklist
+├── checkin.py              the whole bot: API client, Task 1, Task 2
+├── requirements.txt        requests, python-dotenv
+├── .gitignore              keeps .env, .venv/ and __pycache__/ out of the repo
+└── README.md
+```
+
+**The script creates `artifact/` and `artifact/files/` if they are not there.** The
+first thing `Collector.collect()` does is:
+
+```python
+FILES_DIR.mkdir(parents=True, exist_ok=True)
+```
+
+`parents=True` builds `artifact/` on the way to `artifact/files/`, so both appear even
+when neither exists, and `exist_ok=True` means an existing pair is left alone. Nothing
+has to be created by hand, and the folders are never checked in empty - git does not
+track directories, only files, so they appear in the repo the moment the first run
+commits something into them.
+
+That matters on GitHub Actions, where every run starts on a fresh machine holding
+nothing but a clone of this repo. The bot builds the folders from scratch each time.
+
+Because those paths are relative, run the script from the repository root so the
+artifact lands in the right place.
 
 ## Setup
 
@@ -126,6 +167,19 @@ You can also trigger a run by hand from the Actions tab - that is what the
 `workflow_dispatch` trigger is for. Check the run log afterward and confirm the token
 appears masked as `***`.
 
+### Where the output goes
+
+A workflow runs on a throwaway virtual machine, so anything written there is lost unless
+it is sent somewhere. This one sends `artifact/` to two places:
+
+1. **Back into this repository**, as a commit by `github-actions[bot]`. This is the copy
+   that is graded, and it is why the workflow needs `contents: write`.
+2. **Onto the Actions run**, as a downloadable zip. Convenient for checking a single run,
+   but it is attached to the run rather than the repo and GitHub deletes it after 90 days.
+
+Because the workflow commits to `main` on its own, a local clone falls behind by a few
+commits a day. Run `git pull` before committing locally, or the push is rejected.
+
 ## Documentation
 
 | File | What's in it |
@@ -156,6 +210,8 @@ before anything is created. This table is updated as the project goes.
 | 2026-09-15 | Claude Code (Opus 5) | Wrote Task 2: the `Replier` class, the keyword match, the duplicate-reply guard, and the 423 handling. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrote `.github/workflows/checkin.yml`, and checked the cron times against the Central time zone. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrapped the two tasks in separate try/except blocks so a failed collection cannot stop the check-in replies. |
+| 2026-09-15 | Claude Code (Opus 5) | Cleared `artifact/` from the repo so the first workflow run rebuilds and commits it by itself. |
+| 2026-09-15 | Claude Code (Opus 5) | Added the project structure section and the note on where the workflow's output goes. |
 
 ### What I wrote myself
 
