@@ -15,8 +15,9 @@ on my behalf, without me being at the keyboard.
 
 ## Status
 
-Task 1 (collection) is working and verified against the live API. Task 2 is written
-but has not been run yet - no replies have been posted. The scheduled workflow is next.
+Task 1 (collection) is working and verified against the live API. Task 2 and the
+scheduled workflow are written but have not been run yet - no replies have been
+posted.
 
 - [x] Repo initialized, `.gitignore` in place
 - [x] Assignment and rubric documented under `docs/`
@@ -24,7 +25,7 @@ but has not been run yet - no replies have been posted. The scheduled workflow i
 - [x] `requirements.txt`
 - [x] Task 1 - collection
 - [~] Task 2 - check-in replies (written, not yet run)
-- [ ] GitHub Actions workflow
+- [~] GitHub Actions workflow (written, not yet run)
 
 See [docs/RUBRIC.md](docs/RUBRIC.md) for the full checklist.
 
@@ -114,9 +115,12 @@ permissions:
 GitHub cron is **UTC** and runs can be delayed under load. Each check-in is open
 00:00-23:59 **Central** on the date in its title, so a run scheduled between **04:00 and
 06:00 UTC** sits right on top of midnight Central during daylight time - a delayed run
-there can slip into the next day and miss a check-in entirely. The schedule runs a few
-times a day, well away from that band, so a failed run has a backup. The duplicate-reply
-check makes the extra runs harmless.
+there can slip into the next day and miss a check-in entirely.
+
+The schedule runs at **13:00, 19:00 and 01:00 UTC**, which is 08:00, 14:00 and 20:00
+Central - three attempts per Central day, the closest being four hours clear of
+midnight. Three runs mean a failed one has a backup, and the duplicate-reply check
+makes the extra runs harmless.
 
 You can also trigger a run by hand from the Actions tab - that is what the
 `workflow_dispatch` trigger is for. Check the run log afterward and confirm the token
@@ -150,6 +154,7 @@ before anything is created. This table is updated as the project goes.
 | 2026-09-15 | Claude Code (Opus 5) | Probed the live API to confirm pagination, body truncation, and the attachment object shape before any code was written. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrote Task 1: the `PracticeHubClient` paging methods, the `Collector` class, and `requirements.txt`. |
 | 2026-09-15 | Claude Code (Opus 5) | Wrote Task 2: the `Replier` class, the keyword match, the duplicate-reply guard, and the 423 handling. |
+| 2026-09-15 | Claude Code (Opus 5) | Wrote `.github/workflows/checkin.yml`, and checked the cron times against the Central time zone. |
 
 ### What I wrote myself
 

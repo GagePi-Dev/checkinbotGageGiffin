@@ -16,13 +16,13 @@ Check items off as they are finished. Nothing here is done yet.
 
 ## 2. A scheduled workflow — 15 pts
 
-- [ ] `.github/workflows/*.yml` exists
-- [ ] `schedule:` cron trigger, running 2–3× per day
-- [ ] Cron avoids **04:00–06:00 UTC** (too close to midnight Central; a delayed run
+- [x] `.github/workflows/*.yml` exists
+- [x] `schedule:` cron trigger, running 2–3× per day
+- [x] Cron avoids **04:00–06:00 UTC** (too close to midnight Central; a delayed run
       can slip into the next day and miss a check-in)
-- [ ] `workflow_dispatch` trigger so it can be run by hand
-- [ ] `permissions: contents: write` at the top level (required to push `artifact/` back)
-- [ ] Token read from `secrets.PRACTICE_API_TOKEN` — never in code, never printed to logs
+- [x] `workflow_dispatch` trigger so it can be run by hand
+- [x] `permissions: contents: write` at the top level (required to push `artifact/` back)
+- [x] Token read from `secrets.PRACTICE_API_TOKEN` — never in code, never printed to logs
 - [ ] Verified working by an actual run in the Actions tab
 
 ## 3. Collection — Task 1 — 25 pts
