@@ -15,13 +15,14 @@ on my behalf, without me being at the keyboard.
 
 ## Status
 
-Project scaffolding and documentation only so far. The bot itself is not written yet.
+Task 1 (collection) is working and verified against the live API. Task 2 and the
+scheduled workflow are next.
 
 - [x] Repo initialized, `.gitignore` in place
 - [x] Assignment and rubric documented under `docs/`
 - [x] GitHub repository secrets and variables configured
-- [ ] `requirements.txt`
-- [ ] Task 1 - collection
+- [x] `requirements.txt`
+- [x] Task 1 - collection
 - [ ] Task 2 - check-in replies
 - [ ] GitHub Actions workflow
 
@@ -146,6 +147,8 @@ before anything is created. This table is updated as the project goes.
 | 2026-09-15 | Claude Code (Opus 5) | Wrote the base README and the `.gitignore`. |
 | 2026-09-15 | Claude Code (Opus 5) | Connected the repo to its GitHub remote, renamed it to `checkinbotGageGiffin`, and verified the repository secrets and variables. |
 | 2026-09-15 | Claude Code (Opus 5) | Folded the separate setup doc into the README as a setup section. |
+| 2026-09-15 | Claude Code (Opus 5) | Probed the live API to confirm pagination, body truncation, and the attachment object shape before any code was written. |
+| 2026-09-15 | Claude Code (Opus 5) | Wrote Task 1: the `PracticeHubClient` paging methods, the `Collector` class, and `requirements.txt`. |
 
 ### What I wrote myself
 

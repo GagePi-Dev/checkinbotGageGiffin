@@ -7,12 +7,12 @@ Check items off as they are finished. Nothing here is done yet.
 
 ## 1. Repo set up correctly — 10 pts
 
-- [ ] Repo named `checkinbotGageGiffin` on GitHub
-- [ ] Every `.py` file starts with the three-line header
+- [x] Repo named `checkinbotGageGiffin` on GitHub
+- [x] Every `.py` file starts with the three-line header
       (`# INF601 - Advanced Programming in Python` / `# Gage Giffin` / `# Scheduled Check-In Bot`)
-- [ ] `requirements.txt` present and accurate
-- [ ] `README.md` present with an `## AI Usage` section
-- [ ] `.gitignore` keeps `.env`, `.venv/`, `__pycache__/` out of the repo
+- [x] `requirements.txt` present and accurate
+- [x] `README.md` present with an `## AI Usage` section
+- [x] `.gitignore` keeps `.env`, `.venv/`, `__pycache__/` out of the repo
 
 ## 2. A scheduled workflow — 15 pts
 
@@ -29,12 +29,12 @@ Check items off as they are finished. Nothing here is done yet.
 
 Graded with the instructor's `verify_artifact.py`.
 
-- [ ] Fetches only the instructor's posts (`INSTRUCTOR_ID`, currently `7`)
-- [ ] **Pages through every page** of results, not just the first
-- [ ] Captures title, **full body** (no truncation), tags, timestamps
-- [ ] **Downloads every attachment** to `artifact/files/`
-- [ ] Writes `artifact/collected.json`
-- [ ] Spot-checked: a multi-paragraph post keeps all paragraphs; a post with two
+- [x] Fetches only the instructor's posts (`INSTRUCTOR_ID`, currently `7`)
+- [x] **Pages through every page** of results, not just the first
+- [x] Captures title, **full body** (no truncation), tags, timestamps
+- [x] **Downloads every attachment** to `artifact/files/`
+- [x] Writes `artifact/collected.json`
+- [x] Spot-checked: a multi-paragraph post keeps all paragraphs; a post with two
       attachments yields two downloaded files
 
 ## 4. Check-ins — Task 2 — 30 pts
@@ -52,14 +52,14 @@ is permanently lost.
 ## 5. Artifact saved to the repo — 10 pts
 
 - [ ] Workflow commits `artifact/` back to the repo (and/or uploads it as an Actions artifact)
-- [ ] `artifact/` is visible on GitHub and reviewable before the deadline
+- [x] `artifact/` is visible on GitHub and reviewable before the deadline
 
 ## 6. Robustness — 5 pts
 
 - [ ] A `423` (window closed) is handled gracefully — logged, run does not crash
 - [ ] Duplicate-reply guard: checks a post's existing comments for one authored by me
       before replying, so 2–3 runs per day are safe
-- [ ] Other HTTP errors do not take down the whole run
+- [x] Other HTTP errors do not take down the whole run
 
 ## 7. Commits — 5 pts
 
